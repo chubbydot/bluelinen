@@ -1,5 +1,6 @@
 // src/blocks/Archive.ts (示例：你可以把这些放在一个文件夹里)
 import type { Block } from 'payload'
+import { ButtonBlock } from './button'
 
 // 1. Hero 组件 (大图大标题)
 export const HeroBlock: Block = {
@@ -7,9 +8,22 @@ export const HeroBlock: Block = {
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'subtitle', type: 'textarea' },
-    { name: 'backgroundImage', type: 'upload', relationTo: 'media' },
-    { name: 'buttonText', type: 'text' },
-    { name: 'buttonLink', type: 'text' },
+    {
+      name: 'imagePosition',
+      type: 'select',
+      options: [
+        { label: 'Background', value: 'background' },
+        { label: 'Left', value: 'left' },
+        { label: 'Right', value: 'right' },
+      ],
+      defaultValue: 'right',
+    },
+    { name: 'heroImage', type: 'upload', relationTo: 'media' },
+    {
+      name: 'button',
+      type: 'blocks',
+      blocks: [ButtonBlock],
+    },
   ],
 }
 
@@ -35,7 +49,10 @@ export const CTABlock: Block = {
   slug: 'cta',
   fields: [
     { name: 'text', type: 'text', required: true },
-    { name: 'buttonLabel', type: 'text' },
-    { name: 'link', type: 'text' },
+    {
+      name: 'button',
+      type: 'blocks',
+      blocks: [ButtonBlock],
+    },
   ],
 }

@@ -176,9 +176,9 @@ export interface Page {
         | {
             title: string;
             subtitle?: string | null;
-            backgroundImage?: (number | null) | Media;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            imagePosition?: ('background' | 'left' | 'right') | null;
+            heroImage?: (number | null) | Media;
+            button?: ButtonBlock[] | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'hero';
@@ -199,8 +199,7 @@ export interface Page {
           }
         | {
             text: string;
-            buttonLabel?: string | null;
-            link?: string | null;
+            button?: ButtonBlock[] | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'cta';
@@ -209,6 +208,22 @@ export interface Page {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonBlock".
+ */
+export interface ButtonBlock {
+  label: string;
+  icon?: (number | null) | Media;
+  iconPosition?: ('left' | 'right') | null;
+  link: string;
+  variant?: ('primary' | 'secondary' | 'outline' | 'ghost') | null;
+  size?: ('small' | 'medium' | 'large') | null;
+  newTab?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'button';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -376,9 +391,13 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               subtitle?: T;
-              backgroundImage?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              imagePosition?: T;
+              heroImage?: T;
+              button?:
+                | T
+                | {
+                    button?: T | ButtonBlockSelect<T>;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -401,14 +420,32 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
-              buttonLabel?: T;
-              link?: T;
+              button?:
+                | T
+                | {
+                    button?: T | ButtonBlockSelect<T>;
+                  };
               id?: T;
               blockName?: T;
             };
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonBlock_select".
+ */
+export interface ButtonBlockSelect<T extends boolean = true> {
+  label?: T;
+  icon?: T;
+  iconPosition?: T;
+  link?: T;
+  variant?: T;
+  size?: T;
+  newTab?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
