@@ -2,6 +2,9 @@ import type { CollectionConfig } from 'payload'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  access: {
+    read: () => true,
+  },
   admin: {
     preview: (doc) => {
       return doc?.enabled ? `http://localhost:3000/${doc.slug}` : null

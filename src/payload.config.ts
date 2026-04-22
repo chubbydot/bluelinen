@@ -52,6 +52,10 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  cors: [
+    'http://localhost:4321', // Next.js dev server
+  ],
+  csrf: ['http://localhost:4321'],
   collections: [Users, Media, Pages, Blocks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
