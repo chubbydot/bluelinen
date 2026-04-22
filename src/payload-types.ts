@@ -171,40 +171,48 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  layout?:
-    | (
-        | {
-            title: string;
-            subtitle?: string | null;
-            imagePosition?: ('background' | 'left' | 'right') | null;
-            heroImage?: (number | null) | Media;
-            button?: ButtonBlock[] | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero';
-          }
-        | {
-            heading?: string | null;
-            cards?:
+  section?:
+    | {
+        enableBackground?: boolean | null;
+        content?:
+          | (
               | {
-                  icon?: (number | null) | Media;
-                  title?: string | null;
-                  description?: string | null;
+                  title: string;
+                  subtitle?: string | null;
+                  imagePosition?: ('background' | 'left' | 'right') | null;
+                  heroImage?: (number | null) | Media;
+                  button?: ButtonBlock[] | null;
                   id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'features';
-          }
-        | {
-            text: string;
-            button?: ButtonBlock[] | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'cta';
-          }
-      )[]
+                  blockName?: string | null;
+                  blockType: 'hero';
+                }
+              | {
+                  heading?: string | null;
+                  cards?:
+                    | {
+                        icon?: (number | null) | Media;
+                        title?: string | null;
+                        description?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'features';
+                }
+              | {
+                  text: string;
+                  button?: ButtonBlock[] | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'cta';
+                }
+            )[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'layoutSection';
+      }[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -383,47 +391,58 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  layout?:
+  section?:
     | T
     | {
-        hero?:
+        layoutSection?:
           | T
           | {
-              title?: T;
-              subtitle?: T;
-              imagePosition?: T;
-              heroImage?: T;
-              button?:
+              enableBackground?: T;
+              content?:
                 | T
                 | {
-                    button?: T | ButtonBlockSelect<T>;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        features?:
-          | T
-          | {
-              heading?: T;
-              cards?:
-                | T
-                | {
-                    icon?: T;
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        cta?:
-          | T
-          | {
-              text?: T;
-              button?:
-                | T
-                | {
-                    button?: T | ButtonBlockSelect<T>;
+                    hero?:
+                      | T
+                      | {
+                          title?: T;
+                          subtitle?: T;
+                          imagePosition?: T;
+                          heroImage?: T;
+                          button?:
+                            | T
+                            | {
+                                button?: T | ButtonBlockSelect<T>;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    features?:
+                      | T
+                      | {
+                          heading?: T;
+                          cards?:
+                            | T
+                            | {
+                                icon?: T;
+                                title?: T;
+                                description?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    cta?:
+                      | T
+                      | {
+                          text?: T;
+                          button?:
+                            | T
+                            | {
+                                button?: T | ButtonBlockSelect<T>;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

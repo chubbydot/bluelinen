@@ -1,5 +1,23 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, Block } from 'payload'
 import { HeroBlock, FeaturesBlock, CTABlock } from './Blocks' // 导入上面定义的块
+
+// 创建一个包装块，包含背景颜色开关和子块
+export const LayoutSectionBlock: Block = {
+  slug: 'layoutSection',
+  fields: [
+    {
+      name: 'enableBackground',
+      type: 'checkbox',
+      label: 'Enable Background Color',
+      defaultValue: false,
+    },
+    {
+      name: 'content',
+      type: 'blocks',
+      blocks: [HeroBlock, FeaturesBlock, CTABlock],
+    },
+  ],
+}
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -22,9 +40,9 @@ export const Pages: CollectionConfig = {
       admin: { position: 'sidebar' },
     },
     {
-      name: 'layout', // 关键：这是搭积木的地方
+      name: 'section', // 关键：这是搭积木的地方
       type: 'blocks',
-      blocks: [HeroBlock, FeaturesBlock, CTABlock],
+      blocks: [LayoutSectionBlock],
     },
   ],
 }
