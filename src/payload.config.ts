@@ -12,6 +12,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Blocks } from './collections/Blocks'
+import { Menu } from './collections/Menu'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,7 +53,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, Blocks],
+  collections: [Users, Media, Pages, Blocks, Menu],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

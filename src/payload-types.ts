@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     pages: Page;
     blocks: Block;
+    menu: Menu;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -83,6 +84,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     blocks: BlocksSelect<false> | BlocksSelect<true>;
+    menu: MenuSelect<false> | MenuSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -220,6 +222,37 @@ export interface Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu".
+ */
+export interface Menu {
+  id: number;
+  title: string;
+  items?:
+    | {
+        label: string;
+        url?: string | null;
+        children?:
+          | {
+              label: string;
+              url?: string | null;
+              subChildren?:
+                | {
+                    label: string;
+                    url?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -257,6 +290,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blocks';
         value: number | Block;
+      } | null)
+    | ({
+        relationTo: 'menu';
+        value: number | Menu;
       } | null);
   globalSlug?: string | null;
   user:
@@ -379,6 +416,36 @@ export interface BlocksSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu_select".
+ */
+export interface MenuSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              subChildren?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
