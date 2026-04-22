@@ -1,20 +1,9 @@
-import type { CollectionConfig } from 'payload'
+import type { Block } from 'payload'
 
-export const Menu: CollectionConfig = {
+export const MenuBlock: Block = {
   slug: 'menu',
-  admin: {
-    useAsTitle: 'title',
-  },
-  access: {
-    // 关键：必须允许所有人（包括 Astro 服务端）读取，否则 fetch 会报 403
-    read: () => true,
-  },
+  interfaceName: 'MenuBlock',
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
     {
       name: 'items',
       type: 'array',

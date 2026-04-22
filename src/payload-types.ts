@@ -70,7 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
-    menu: Menu;
+    navigation: Navigation;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,7 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    menu: MenuSelect<false> | MenuSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -235,11 +235,21 @@ export interface ButtonBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu".
+ * via the `definition` "navigation".
  */
-export interface Menu {
+export interface Navigation {
   id: number;
   title: string;
+  menu?: MenuBlock[] | null;
+  cta?: ButtonBlock[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MenuBlock".
+ */
+export interface MenuBlock {
   items?:
     | {
         label: string;
@@ -261,8 +271,9 @@ export interface Menu {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'menu';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -301,8 +312,8 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
-        relationTo: 'menu';
-        value: number | Menu;
+        relationTo: 'navigation';
+        value: number | Navigation;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -468,10 +479,28 @@ export interface ButtonBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu_select".
+ * via the `definition` "navigation_select".
  */
-export interface MenuSelect<T extends boolean = true> {
+export interface NavigationSelect<T extends boolean = true> {
   title?: T;
+  menu?:
+    | T
+    | {
+        menu?: T | MenuBlockSelect<T>;
+      };
+  cta?:
+    | T
+    | {
+        button?: T | ButtonBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MenuBlock_select".
+ */
+export interface MenuBlockSelect<T extends boolean = true> {
   items?:
     | T
     | {
@@ -493,8 +522,8 @@ export interface MenuSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
