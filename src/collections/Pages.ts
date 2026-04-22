@@ -4,6 +4,9 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   admin: {
     preview: (doc) => {

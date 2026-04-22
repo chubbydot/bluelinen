@@ -12,6 +12,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Blocks } from './collections/Blocks'
+import { Navigation } from './collections/Navigation'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -56,7 +57,7 @@ export default buildConfig({
     'http://localhost:4321', // Next.js dev server
   ],
   csrf: ['http://localhost:4321'],
-  collections: [Users, Media, Pages, Blocks],
+  collections: [Users, Media, Pages, Blocks, Navigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
