@@ -26,7 +26,6 @@ export const Navigation: CollectionConfig = {
       name: 'cta',
       type: 'blocks',
       blocks: [ButtonBlock],
-      maxRows: 1,
     },
   ],
 }
