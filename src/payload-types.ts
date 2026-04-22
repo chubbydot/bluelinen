@@ -207,6 +207,14 @@ export interface Page {
                   blockName?: string | null;
                   blockType: 'cta';
                 }
+              | {
+                  title: string;
+                  subtitle?: string | null;
+                  button?: ButtonBlock[] | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'textBanner';
+                }
             )[]
           | null;
         id?: string | null;
@@ -446,6 +454,19 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           text?: T;
+                          button?:
+                            | T
+                            | {
+                                button?: T | ButtonBlockSelect<T>;
+                              };
+                          id?: T;
+                          blockName?: T;
+                        };
+                    textBanner?:
+                      | T
+                      | {
+                          title?: T;
+                          subtitle?: T;
                           button?:
                             | T
                             | {

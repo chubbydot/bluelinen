@@ -56,3 +56,17 @@ export const CTABlock: Block = {
     },
   ],
 }
+
+// 4. Text Banner 组件 (文字横幅)
+export const TextBannerBlock: Block = {
+  slug: 'textBanner',
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    {
+      name: 'button',
+      type: 'blocks',
+      blocks: [ButtonBlock],
+    },
+  ],
+}
