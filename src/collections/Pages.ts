@@ -10,7 +10,7 @@ export const Pages: CollectionConfig = {
   },
   admin: {
     preview: (doc) => {
-      return doc?.enabled ? `http://localhost:3000/${doc.slug}` : null
+      return doc?.enabled ? `http://localhost:4321/${doc.slug}` : null
     },
   },
   fields: [
