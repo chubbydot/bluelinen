@@ -1,20 +1,27 @@
 import type { CollectionConfig } from 'payload'
+import { HeroBlock, FeaturesBlock, CTABlock } from './Blocks' // 导入上面定义的块
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
-    preview: (doc) => {
-      return doc?.enabled ? `http://localhost:3000/${doc.slug}` : null
-    },
+    useAsTitle: 'title',
   },
   fields: [
     {
-      name: 'slug',
+      name: 'title',
       type: 'text',
+      required: true,
     },
     {
-      name: 'enabled',
-      type: 'checkbox',
+      name: 'slug',
+      type: 'text',
+      required: true,
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'layout', // 关键：这是搭积木的地方
+      type: 'blocks',
+      blocks: [HeroBlock, FeaturesBlock, CTABlock],
     },
   ],
 }

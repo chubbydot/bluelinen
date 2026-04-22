@@ -1,15 +1,41 @@
-import type { CollectionConfig } from 'payload'
+// src/blocks/Archive.ts (示例：你可以把这些放在一个文件夹里)
+import type { Block } from 'payload'
 
-export const Blocks: CollectionConfig = {
-  slug: 'blocks',
-  //   admin: {
-  //     useAsTitle: 'email',
-  //   },
-  auth: true,
+// 1. Hero 组件 (大图大标题)
+export const HeroBlock: Block = {
+  slug: 'hero',
   fields: [
-    // {
-    //   name: 'slug',
-    //   type: 'text',
-    // },
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    { name: 'backgroundImage', type: 'upload', relationTo: 'media' },
+    { name: 'buttonText', type: 'text' },
+    { name: 'buttonLink', type: 'text' },
+  ],
+}
+
+// 2. Features 组件 (三/四列图标+文字)
+export const FeaturesBlock: Block = {
+  slug: 'features',
+  fields: [
+    { name: 'heading', type: 'text' },
+    {
+      name: 'cards',
+      type: 'array',
+      fields: [
+        { name: 'icon', type: 'upload', relationTo: 'media' },
+        { name: 'title', type: 'text' },
+        { name: 'description', type: 'textarea' },
+      ],
+    },
+  ],
+}
+
+// 3. CTA 组件 (底部的横条，引导联系我们)
+export const CTABlock: Block = {
+  slug: 'cta',
+  fields: [
+    { name: 'text', type: 'text', required: true },
+    { name: 'buttonLabel', type: 'text' },
+    { name: 'link', type: 'text' },
   ],
 }
