@@ -11,8 +11,7 @@ import { r2Storage } from '@payloadcms/storage-r2'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
-import { Blocks } from './collections/Blocks'
-import { Navigation } from './collections/Navigation'
+import { Menu } from './collections/Menu'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -53,11 +52,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: [
-    'http://localhost:4321', // Next.js dev server
-  ],
-  csrf: ['http://localhost:4321'],
-  collections: [Users, Media, Pages, Blocks, Navigation],
+  collections: [Users, Media, Pages, Menu],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

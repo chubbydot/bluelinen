@@ -1,152 +1,41 @@
-import type { CollectionConfig, Block } from 'payload'
+// src/blocks/Archive.ts (示例：你可以把这些放在一个文件夹里)
+import type { Block } from 'payload'
 
-// Define nested blocks first (Layer 2)
+// 1. Hero 组件 (大图大标题)
 export const HeroBlock: Block = {
   slug: 'hero',
-  labels: {
-    singular: 'Hero Banner',
-    plural: 'Hero Banners',
-  },
   fields: [
-    {
-      name: 'heading',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'subheading',
-      type: 'text',
-    },
-    {
-      name: 'backgroundImage',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'ctaText',
-      type: 'text',
-    },
-    {
-      name: 'ctaUrl',
-      type: 'text',
-    },
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    { name: 'backgroundImage', type: 'upload', relationTo: 'media' },
+    { name: 'buttonText', type: 'text' },
+    { name: 'buttonLink', type: 'text' },
   ],
 }
 
-export const AccordionBlock: Block = {
-  slug: 'accordion',
-  labels: {
-    singular: 'Accordion',
-    plural: 'Accordions',
-  },
+// 2. Features 组件 (三/四列图标+文字)
+export const FeaturesBlock: Block = {
+  slug: 'features',
   fields: [
+    { name: 'heading', type: 'text' },
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'items',
+      name: 'cards',
       type: 'array',
       fields: [
-        {
-          name: 'question',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'answer',
-          type: 'richText',
-        },
+        { name: 'icon', type: 'upload', relationTo: 'media' },
+        { name: 'title', type: 'text' },
+        { name: 'description', type: 'textarea' },
       ],
     },
   ],
 }
 
-export const TextBlock: Block = {
-  slug: 'text',
-  labels: {
-    singular: 'Text',
-    plural: 'Text Blocks',
-  },
+// 3. CTA 组件 (底部的横条，引导联系我们)
+export const CTABlock: Block = {
+  slug: 'cta',
   fields: [
-    {
-      name: 'content',
-      type: 'richText',
-    },
-  ],
-}
-
-export const ImageBlock: Block = {
-  slug: 'image',
-  labels: {
-    singular: 'Image',
-    plural: 'Images',
-  },
-  fields: [
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
-      name: 'caption',
-      type: 'text',
-    },
-  ],
-}
-
-// Define Color Section block (Layer 1) - uses nested blocks
-export const ColorSectionBlock: Block = {
-  slug: 'colorSection',
-  labels: {
-    singular: 'Color Section',
-    plural: 'Color Sections',
-  },
-  fields: [
-    {
-      name: 'backgroundColor',
-      type: 'select',
-      options: [
-        { label: 'None', value: 'none' },
-        { label: 'Primary', value: 'primary' },
-        { label: 'Secondary', value: 'secondary' },
-        { label: 'Accent', value: 'accent' },
-        { label: 'Light', value: 'light' },
-        { label: 'Dark', value: 'dark' },
-      ],
-      defaultValue: 'none',
-    },
-    {
-      name: 'content',
-      type: 'blocks',
-      blocks: [HeroBlock, AccordionBlock, TextBlock, ImageBlock],
-    },
-  ],
-}
-
-// Main collection
-export const Blocks: CollectionConfig = {
-  slug: 'blocks',
-  access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
-  },
-  admin: {
-    useAsTitle: 'title',
-  },
-  fields: [
-    {
-      name: 'title',
-      type: 'text',
-    },
-    {
-      name: 'sections',
-      type: 'blocks',
-      blocks: [ColorSectionBlock],
-    },
+    { name: 'text', type: 'text', required: true },
+    { name: 'buttonLabel', type: 'text' },
+    { name: 'link', type: 'text' },
   ],
 }
