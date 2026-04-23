@@ -89,3 +89,39 @@ export const CounterSectionBlock: Block = {
     },
   ],
 }
+
+// 6. FAQ Block (常见问题)
+export const FAQBlock: Block = {
+  slug: 'faq',
+  interfaceName: 'FAQBlock',
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    { name: 'image', type: 'upload', relationTo: 'media' },
+    {
+      name: 'accordion',
+      type: 'array',
+      minRows: 1,
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'content', type: 'textarea', required: true },
+      ],
+    },
+  ],
+}
+
+// 7. Logo Section (客户/合作伙伴 Logo 展示)
+export const LogoSectionBlock: Block = {
+  slug: 'logoSection',
+  interfaceName: 'LogoSectionBlock',
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    {
+      name: 'images',
+      type: 'array',
+      minRows: 1,
+      fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
+    },
+  ],
+}

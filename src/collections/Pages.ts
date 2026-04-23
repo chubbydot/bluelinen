@@ -1,5 +1,13 @@
 import type { CollectionConfig, Block } from 'payload'
-import { HeroBlock, FeaturesBlock, CTABlock, TextBannerBlock, CounterSectionBlock } from './Blocks' // 导入上面定义的块
+import {
+  HeroBlock,
+  FeaturesBlock,
+  CTABlock,
+  TextBannerBlock,
+  CounterSectionBlock,
+  FAQBlock,
+  LogoSectionBlock,
+} from './Blocks' // 导入上面定义的块
 
 // 创建一个包装块，包含背景颜色开关和子块
 export const LayoutSectionBlock: Block = {
@@ -14,7 +22,15 @@ export const LayoutSectionBlock: Block = {
     {
       name: 'content',
       type: 'blocks',
-      blocks: [HeroBlock, FeaturesBlock, CTABlock, TextBannerBlock, CounterSectionBlock],
+      blocks: [
+        HeroBlock,
+        FeaturesBlock,
+        CTABlock,
+        TextBannerBlock,
+        CounterSectionBlock,
+        FAQBlock,
+        LogoSectionBlock,
+      ],
     },
   ],
 }
