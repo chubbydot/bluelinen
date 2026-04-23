@@ -7,6 +7,7 @@ import {
   CounterSectionBlock,
   FAQBlock,
   LogoSectionBlock,
+  MasonryBlock,
 } from './Blocks' // 导入上面定义的块
 
 // 创建一个包装块，包含背景颜色开关和子块
@@ -30,6 +31,7 @@ export const LayoutSectionBlock: Block = {
         CounterSectionBlock,
         FAQBlock,
         LogoSectionBlock,
+        MasonryBlock,
       ],
     },
   ],

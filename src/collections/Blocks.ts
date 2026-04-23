@@ -125,3 +125,19 @@ export const LogoSectionBlock: Block = {
     },
   ],
 }
+
+// 8. Masonry Block (瀑布流图片展示)
+export const MasonryBlock: Block = {
+  slug: 'masonry',
+  interfaceName: 'MasonryBlock',
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    {
+      name: 'pictures',
+      type: 'array',
+      minRows: 1,
+      fields: [{ name: 'picture', type: 'upload', relationTo: 'media', required: true }],
+    },
+  ],
+}
