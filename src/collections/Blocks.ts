@@ -70,3 +70,22 @@ export const TextBannerBlock: Block = {
     },
   ],
 }
+
+// 5. Counter Section 组件 (数字统计展示)
+export const CounterSectionBlock: Block = {
+  slug: 'counterSection',
+  interfaceName: 'CounterSectionBlock',
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'subtitle', type: 'textarea' },
+    {
+      name: 'numberTextBlocks',
+      type: 'array',
+      minRows: 1,
+      fields: [
+        { name: 'number', type: 'text', required: true },
+        { name: 'text', type: 'text', required: false },
+      ],
+    },
+  ],
+}

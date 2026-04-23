@@ -215,6 +215,7 @@ export interface Page {
                   blockName?: string | null;
                   blockType: 'textBanner';
                 }
+              | CounterSectionBlock
             )[]
           | null;
         id?: string | null;
@@ -240,6 +241,24 @@ export interface ButtonBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'button';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CounterSectionBlock".
+ */
+export interface CounterSectionBlock {
+  title: string;
+  subtitle?: string | null;
+  numberTextBlocks?:
+    | {
+        number: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'counterSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -475,6 +494,7 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    counterSection?: T | CounterSectionBlockSelect<T>;
                   };
               id?: T;
               blockName?: T;
@@ -495,6 +515,23 @@ export interface ButtonBlockSelect<T extends boolean = true> {
   variant?: T;
   size?: T;
   newTab?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CounterSectionBlock_select".
+ */
+export interface CounterSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  numberTextBlocks?:
+    | T
+    | {
+        number?: T;
+        text?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
